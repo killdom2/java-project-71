@@ -10,7 +10,6 @@ build/tmp
 gradle
 gradlew
 gradlew.bat
-!build/install/app/bin/app
 
 
 ### IntelliJ IDEA ###

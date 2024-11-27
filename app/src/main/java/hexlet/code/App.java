@@ -1,9 +1,19 @@
 package hexlet.code;
 
-import java.util.Scanner;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new CommandLine(new MyHelp()).execute(args);
+    }
+}
+
+@Command(name = "gendiff",
+        mixinStandardHelpOptions = true,
+        description = "Compares two configuration files and shows a difference.")
+
+class MyHelp implements Runnable {
+    public void run() {
     }
 }

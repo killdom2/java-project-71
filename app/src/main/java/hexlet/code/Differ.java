@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import picocli.CommandLine.Option;
+
 public class Differ {
     public static String generate(String filePath1, String filePath2) {
 //        var diff = Differ.generate(filePath1, filePath2);

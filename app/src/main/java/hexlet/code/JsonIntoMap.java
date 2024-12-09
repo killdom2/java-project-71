@@ -16,6 +16,7 @@ class JsonIntoMap {
         } catch (JsonMappingException e) {
             e.printStackTrace();
         }
+        System.out.println(jsonObject);
         return jsonObject;
     }
 }

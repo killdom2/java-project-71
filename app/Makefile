@@ -6,3 +6,5 @@ install: clean
 	gradle installDist
 help:
 	./build/install/app/bin/app -h
+test:
+	gradle test

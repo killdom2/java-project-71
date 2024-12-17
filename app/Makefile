@@ -8,3 +8,5 @@ help:
 	./build/install/app/bin/app -h
 test:
 	gradle test
+checkstyleMain:
+	gradle checkstyleMain

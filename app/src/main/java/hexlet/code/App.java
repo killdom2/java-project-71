@@ -1,7 +1,6 @@
 package hexlet.code;
 
 import picocli.CommandLine;
-import java.io.IOException;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "gendiff",
@@ -11,8 +10,10 @@ import java.util.concurrent.Callable;
 
 
 public class App implements Callable<Integer>  {
-    @CommandLine.Option(names = {"-f", "--format"},
+    @CommandLine.Option(
+            names = {"-f", "--format"},
             paramLabel = "format",
+            defaultValue = "stylish",
             description = "output format [default: stylish]")
     private String format;
     @CommandLine.Parameters(index = "0",
@@ -26,32 +27,11 @@ public class App implements Callable<Integer>  {
 
     @Override
     public Integer call() throws Exception {
+        System.out.println(Differ.generate(filepath1, filepath2));
         return 0;
     }
 
-    public static void main(String[] args) throws IOException {
-
-        FileIntoString file = new FileIntoString();
-        String file1 = "";
-        String file2 = "";
-        JsonIntoMap jsonIntoMap = new JsonIntoMap();
-        JsonObject fMap1;
-        JsonObject fMap2;
-
-        try {
-            file1 = file.read(args[0]);
-            file2 = file.read(args[1]);
-            fMap1 = jsonIntoMap.convert(file1);
-            fMap2 = jsonIntoMap.convert(file2);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Need a files to compare");
-        }
-
-
-
-
-
-
+    public static void main(String[] args) throws Exception {
         int exitCode = new CommandLine(new App()).execute(args);
         System.out.println(exitCode);
     }

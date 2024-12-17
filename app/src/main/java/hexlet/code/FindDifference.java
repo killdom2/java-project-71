@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.TreeSet;
 
 public class FindDifference {
-    String compare(Map<String, Object> map1, Map<String, Object> map2){
+    String compare(Map<String, Object> map1, Map<String, Object> map2) {
 
         StringBuilder difference = new StringBuilder();
 

@@ -15,7 +15,7 @@ class JsonIntoMap {
         Map<String, Object> map = null;
 
         try {
-            map = objectMapper.readValue(file, new TypeReference<>(){});
+            map = objectMapper.readValue(file, new TypeReference<>() { });
         } catch (JsonMappingException e) {
             e.printStackTrace();
         }

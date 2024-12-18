@@ -53,7 +53,7 @@ tasks.named<JavaExec>("run") {
 
 jacoco {
     toolVersion = "0.8.12"
-    reportsDirectory = layout.buildDirectory.dir("customJacocoReportDir")
+    reportsDirectory = layout.buildDirectory.dir("app/build/reports/jacoco")
 }
 
 tasks.jacocoTestReport {
@@ -64,7 +64,7 @@ tasks.jacocoTestReport {
     reports {
         xml.required = false
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+        html.outputLocation = layout.buildDirectory.dir("app/build/reports/jacoco")
     }
 }
 

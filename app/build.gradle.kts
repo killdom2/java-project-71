@@ -7,6 +7,7 @@ plugins {
     checkstyle
     jacoco
     `jacoco-report-aggregation`
+    id("com.github.ben-manes.versions") version "0.51.0"
 }
 
 group = "hexlet.code"
@@ -60,12 +61,5 @@ tasks.jacocoTestReport {
     reports { xml.required.set(true) }
 }
 
-tasks.jacocoTestReport {
-    reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir("app/build/reports/jacoco")
-    }
-}
 
 

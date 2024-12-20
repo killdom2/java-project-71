@@ -23,11 +23,10 @@ public class Differ {
         Map<String, Object> map2 = JsonIntoMap.convert(file2);
 
         FindDifference findDifference = new FindDifference();
-
         return findDifference.compare(map1, map2);
     }
 
-    private static String readFile(String filePath) {
+    static String readFile(String filePath) {
         String content = null;
         try {
             Path path = Paths.get(filePath);

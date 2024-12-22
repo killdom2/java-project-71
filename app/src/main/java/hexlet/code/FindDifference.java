@@ -12,22 +12,27 @@ public class FindDifference {
         keys.addAll(map1.keySet());
         keys.addAll(map2.keySet());
 
-        difference.append("{\n");
+        difference.append("{").append(System.lineSeparator());
         for (String key : keys) {
             if (map1.containsKey(key) && map2.containsKey(key)) {
                 if (map1.get(key).equals(map2.get(key))) {
-                    difference.append("    ").append(key).append(": ").append(map1.get(key)).append("\n");
+                    difference.append("    ").append(key).append(": ")
+                            .append(map1.get(key)).append(System.lineSeparator());
                 } else {
-                    difference.append("  - ").append(key).append(": ").append(map1.get(key)).append("\n");
-                    difference.append("  + ").append(key).append(": ").append(map2.get(key)).append("\n");
+                    difference.append("  - ").append(key).append(": ")
+                            .append(map1.get(key)).append(System.lineSeparator());
+                    difference.append("  + ").append(key).append(": ")
+                            .append(map2.get(key)).append(System.lineSeparator());
                 }
             } else if (map1.containsKey(key) && !map2.containsKey(key)) {
-                difference.append("  - ").append(key).append(": ").append(map1.get(key)).append("\n");
+                difference.append("  - ").append(key).append(": ")
+                        .append(map1.get(key)).append(System.lineSeparator());
             } else if (!map1.containsKey(key) && map2.containsKey(key)) {
-                difference.append("  + ").append(key).append(": ").append(map2.get(key)).append("\n");
+                difference.append("  + ").append(key).append(": ")
+                        .append(map2.get(key)).append(System.lineSeparator());
             }
         }
-        difference.append("}\n");
+        difference.append("}");
 
         return difference.toString();
     }

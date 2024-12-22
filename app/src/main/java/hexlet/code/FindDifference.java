@@ -16,15 +16,15 @@ public class FindDifference {
         for (String key : keys) {
             if (map1.containsKey(key) && map2.containsKey(key)) {
                 if (map1.get(key).equals(map2.get(key))) {
-                    difference.append("  ").append(key).append(": ").append(map1.get(key)).append("\n");
+                    difference.append("    ").append(key).append(": ").append(map1.get(key)).append("\n");
                 } else {
-                    difference.append("- ").append(key).append(": ").append(map1.get(key)).append("\n");
-                    difference.append("+ ").append(key).append(": ").append(map2.get(key)).append("\n");
+                    difference.append("  - ").append(key).append(": ").append(map1.get(key)).append("\n");
+                    difference.append("  + ").append(key).append(": ").append(map2.get(key)).append("\n");
                 }
             } else if (map1.containsKey(key) && !map2.containsKey(key)) {
-                difference.append("- ").append(key).append(": ").append(map1.get(key)).append("\n");
+                difference.append("  - ").append(key).append(": ").append(map1.get(key)).append("\n");
             } else if (!map1.containsKey(key) && map2.containsKey(key)) {
-                difference.append("+ ").append(key).append(": ").append(map2.get(key)).append("\n");
+                difference.append("  + ").append(key).append(": ").append(map2.get(key)).append("\n");
             }
         }
         difference.append("}\n");

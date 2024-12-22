@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 public class Differ {
+
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
 
         String file1 = "";
@@ -19,21 +20,24 @@ public class Differ {
             System.out.println("Need a files to compare");
         }
 
-        Map<String, Object> map1 = JsonIntoMap.convert(file1);
-        Map<String, Object> map2 = JsonIntoMap.convert(file2);
+        Map<String, Object> map1 = Map.of();
+        Map<String, Object> map2 = Map.of();
+
+        if (filepath1.endsWith(".json")) {
+            map1 = Parse.jsonString(file1);
+            map2 = Parse.jsonString(file2);
+        } else  if (filepath1.endsWith(".yaml") || filepath1.endsWith(".yml")) {
+            map1 = Parse.yamlString(file1);
+            map2 = Parse.yamlString(file2);
+        }
 
         FindDifference findDifference = new FindDifference();
         return findDifference.compare(map1, map2);
     }
 
-    static String readFile(String filePath) {
-        String content = null;
-        try {
-            Path path = Paths.get(filePath);
-            content = Files.readString(path);
-        } catch (IOException e) {
-            System.out.println("File not found: " + filePath);
-        }
-        return content;
+    static String readFile(String filePath) throws IOException {
+
+        Path path = Paths.get(filePath);
+        return Files.readString(path);
     }
 }

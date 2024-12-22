@@ -39,6 +39,7 @@ public class AppTest {
             expected = readString(Path.of("src/main/resources/expected"));
             assertEquals(expected, actual);
         } catch (Exception ignored) {
+            System.out.println("File not found");
         }
     }
 
@@ -50,6 +51,7 @@ public class AppTest {
             String actual = Differ.readFile(filepath1);
             assertEquals(expected, actual);
         } catch (IOException e) {
+            System.out.println("File not found");
         }
     }
 

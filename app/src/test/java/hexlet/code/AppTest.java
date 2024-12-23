@@ -36,7 +36,7 @@ public class AppTest {
         String actual;
         try {
             actual = Differ.generate(filepath1, filepath2, format);
-            expected = readString(Path.of("src/main/resources/expected"));
+            expected = readString(Path.of("src/test/resources/expected.txt"));
             assertEquals(expected, actual);
         } catch (Exception ignored) {
             System.out.println("File not found");
@@ -64,4 +64,17 @@ public class AppTest {
             System.out.print("");
         }
     }
+    @Test
+    void testApp() {
+        App app = new App();
+        assertThrows(NullPointerException.class, app::call);
+    }
+    /*@Test
+    void testAppYamlFile() throws Exception{
+        setUp();
+        App app = new App();
+        var expected = readString(Path.of("src/test/resources/expected.txt"));
+        var actual = app.call();
+        assertEquals(expected, actual);
+    }*/
 }

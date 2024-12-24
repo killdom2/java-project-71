@@ -14,29 +14,47 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class AppTest {
     String filepath1;
     String filepath2;
+    String filepath3;
+    String filepath4;
     String format;
 
     @BeforeEach
     void setUp() {
-        filepath1 = "src/main/resources/file1.json";
-        filepath2 = "src/main/resources/file2.json";
+        filepath1 = "src/main/resources/nestedFile1.json";
+        filepath2 = "src/main/resources/nestedFile2.json";
+        filepath3 = "src/main/resources/nestedFile1.yaml";
+        filepath4 = "src/main/resources/nestedFile2.yml";
         format = "";
     }
 
     @Test
-    void testDifferGenerate1() {
+    void testDifferGenerate() {
         assertThrows(IOException.class,
                 () -> Differ.generate("Path missing", "Path missing", format));
     }
 
     @Test
-    void testDifferGenerate2() {
+    void testDifferGenerateJson() {
         setUp();
         String expected;
         String actual;
         try {
             actual = Differ.generate(filepath1, filepath2, format);
-            expected = readString(Path.of("src/test/resources/expected.txt"));
+            expected = readString(Path.of("src/test/resources/nestedExpected.txt"));
+            assertEquals(expected, actual);
+        } catch (Exception ignored) {
+            System.out.println("File not found");
+        }
+    }
+
+    @Test
+    void testDifferGenerateYaml() {
+        setUp();
+        String expected;
+        String actual;
+        try {
+            actual = Differ.generate(filepath3, filepath4, format);
+            expected = readString(Path.of("src/test/resources/nestedExpected.txt"));
             assertEquals(expected, actual);
         } catch (Exception ignored) {
             System.out.println("File not found");
@@ -69,12 +87,4 @@ public class AppTest {
         App app = new App();
         assertThrows(NullPointerException.class, app::call);
     }
-    /*@Test
-    void testAppYamlFile() throws Exception{
-        setUp();
-        App app = new App();
-        var expected = readString(Path.of("src/test/resources/expected.txt"));
-        var actual = app.call();
-        assertEquals(expected, actual);
-    }*/
 }

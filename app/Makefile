@@ -30,6 +30,15 @@ checkstyleMain:
 check-deps:
 	./gradlew dependencyUpdates -Drevision=release
 
+app:
+	./build/install/app/bin/app -h
+
+json:
+	./build/install/app/bin/app src/main/resources/nestedFile1.json src/main/resources/nestedFile2.json -f stylish
+
+yaml:
+	./build/install/app/bin/app src/main/resources/nestedFile1.yaml src/main/resources/nestedFile2.yml -f stylish
+
 
 build-run: build run
 

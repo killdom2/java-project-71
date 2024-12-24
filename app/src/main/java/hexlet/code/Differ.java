@@ -23,16 +23,16 @@ public class Differ {
         Map<String, Object> map1 = Map.of();
         Map<String, Object> map2 = Map.of();
 
-        if (filepath1.endsWith(".json")) {
+        if (filepath1.endsWith("json")) {
             map1 = Parse.jsonString(file1);
             map2 = Parse.jsonString(file2);
-        } else  if (filepath1.endsWith(".yaml") || filepath1.endsWith(".yml")) {
+        } else  if (filepath1.endsWith("yaml") || filepath1.endsWith("yml")) {
             map1 = Parse.yamlString(file1);
             map2 = Parse.yamlString(file2);
         }
 
-        FindDifference findDifference = new FindDifference();
-        return findDifference.compare(map1, map2);
+        Difference difference = new Difference();
+        return difference.compare(map1, map2);
     }
 
     static String readFile(String filePath) throws IOException {

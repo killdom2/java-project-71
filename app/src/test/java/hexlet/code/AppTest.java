@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import static java.nio.file.Files.readString;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AppTest {
     String filepath0;
@@ -24,7 +26,7 @@ public class AppTest {
         filepath2 = "src/main/resources/nestedFile2.json";
         filepath3 = "src/main/resources/nestedFile1.yaml";
         filepath4 = "src/main/resources/nestedFile2.yml";
-        format = "";
+        format = "stylish";
     }
 
     @Test

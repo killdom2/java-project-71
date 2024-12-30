@@ -1,47 +1,47 @@
 package hexlet.code;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.Comparator;
+
+import static hexlet.code.Status.UPDATED;
+import static hexlet.code.Status.ADDED;
+import static hexlet.code.Status.REMOVED;
+import static hexlet.code.Status.SAME;
+
 
 public class Difference {
-    String compare(Map<String, Object> map1, Map<String, Object> map2) {
-
-        StringBuilder difference = new StringBuilder();
-
+    public static List<Map<String, Status>> compare(Map<String, Object> map1, Map<String, Object> map2) {
         TreeSet<String> keys = new TreeSet<>();
         keys.addAll(map1.keySet());
         keys.addAll(map2.keySet());
 
-        difference.append("{").append(System.lineSeparator());
-        boolean isIquals;
+        Map<String, Status> result = new HashMap<>();
 
         for (String key : keys) {
             if (map1.containsKey(key) && map2.containsKey(key)) {
+                boolean isEqual = false;
                 try {
-                    isIquals = map1.get(key).equals(map2.get(key));
-                } catch (NullPointerException e) {
-                    isIquals = false;
+                    isEqual = map1.get(key).equals(map2.get(key));
+                } catch (Exception ignored) {
                 }
-                if (isIquals) {
-                    difference.append("    ").append(key).append(": ")
-                            .append(map1.get(key)).append(System.lineSeparator());
+                if (isEqual) {
+                    result.put(key, SAME);
                 } else {
-                    difference.append("  - ").append(key).append(": ")
-                            .append(map1.get(key)).append(System.lineSeparator());
-                    difference.append("  + ").append(key).append(": ")
-                            .append(map2.get(key)).append(System.lineSeparator());
+                    result.put(key, UPDATED);
                 }
             } else if (map1.containsKey(key) && !map2.containsKey(key)) {
-                difference.append("  - ").append(key).append(": ")
-                        .append(map1.get(key)).append(System.lineSeparator());
+                result.put(key, REMOVED);
             } else if (!map1.containsKey(key) && map2.containsKey(key)) {
-                difference.append("  + ").append(key).append(": ")
-                        .append(map2.get(key)).append(System.lineSeparator());
+                result.put(key, ADDED);
             }
         }
 
-        difference.append("}");
+        List<Map<String, Status>> list = ChankedMap.breakDownTheMap(result);
+        list.sort(Comparator.comparing(Object::toString));
 
-        return difference.toString();
+        return list;
     }
 }

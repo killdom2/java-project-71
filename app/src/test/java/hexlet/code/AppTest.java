@@ -7,11 +7,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import static java.nio.file.Files.readString;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTest {
+    String filepath0;
     String filepath1;
     String filepath2;
     String filepath3;
@@ -20,6 +19,7 @@ public class AppTest {
 
     @BeforeEach
     void setUp() {
+        filepath0 = "src/main/resources/file1.json";
         filepath1 = "src/main/resources/nestedFile1.json";
         filepath2 = "src/main/resources/nestedFile2.json";
         filepath3 = "src/main/resources/nestedFile1.yaml";
@@ -87,4 +87,12 @@ public class AppTest {
         App app = new App();
         assertThrows(NullPointerException.class, app::call);
     }
+    /*@Test
+    void testChankedMap() throws IOException {
+        setUp();
+        var map = Parser.convertJson(readString(Path.of(filepath1)));
+        var actual = ChankedMap.breakDownTheMap(map);
+        String expected = readString(Path.of("src/test/resources/mapIntoList.txt"));
+        assertEquals(expected, actual.toString());
+    }*/
 }

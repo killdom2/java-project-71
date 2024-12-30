@@ -8,9 +8,9 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.util.Map;
 
-public class Parse {
+public class Parser {
     @SuppressWarnings({})
-    static Map<String, Object> jsonString(String file) throws JsonProcessingException {
+    static Map<String, Object> convertJson(String file) throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> map = null;
@@ -23,7 +23,7 @@ public class Parse {
         return map;
     }
 
-    static Map<String, Object> yamlString(String yaml) {
+    static Map<String, Object> convertYaml(String yaml) {
 
         Yaml yamlString = new Yaml();
         return yamlString.load(yaml);

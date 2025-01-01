@@ -1,5 +1,5 @@
 package hexlet.code;
 
-public enum Key {
+public enum Fields {
     FIELD, STATUS, OLD_VALUE, NEW_VALUE
 }

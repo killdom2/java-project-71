@@ -8,6 +8,8 @@ import java.util.Map;
 public class Plain {
     public static String format(Map<String, Object> map1, Map<String, Object> map2, List<Map<String, Status>> list) {
 
+        System.out.println(list);
+
         StringBuilder sb = new StringBuilder();
         for (Map<String, Status> map : list) {
             for (Map.Entry<String, Status> entry : map.entrySet()) {
@@ -15,8 +17,8 @@ public class Plain {
                 Status status = entry.getValue();
                 switch (status) {
                     case UPDATED -> sb.append("Property '").append(key).append("' was updated. From ")
-                            .append(map1.get(key)).append(" to ").append(map2.get(key))
-                            .append(System.lineSeparator());
+                                                .append(map1.get(key)).append(" to ").append(map2.get(key))
+                                                .append(System.lineSeparator());
                     case REMOVED -> sb.append("Property '").append(key).append("' was removed")
                             .append(System.lineSeparator());
                     case ADDED -> sb.append("Property '").append(key).append("' was added with value: ")

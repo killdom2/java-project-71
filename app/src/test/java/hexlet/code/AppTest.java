@@ -89,12 +89,4 @@ public class AppTest {
         App app = new App();
         assertThrows(NullPointerException.class, app::call);
     }
-    /*@Test
-    void testChankedMap() throws IOException {
-        setUp();
-        var map = Parser.convertJson(readString(Path.of(filepath1)));
-        var actual = ChankedMap.breakDownTheMap(map);
-        String expected = readString(Path.of("src/test/resources/mapIntoList.txt"));
-        assertEquals(expected, actual.toString());
-    }*/
 }

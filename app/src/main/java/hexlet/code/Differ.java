@@ -30,8 +30,8 @@ public class Differ {
             map2 = Parser.convertYaml(file2);
         }
 
-        var list = Difference.compare(map1, map2);
-        return Formatter.choose(map1, map2, list, format);
+        var differences = Differences.compare(map1, map2);
+        return Formatter.choose(differences, format);
     }
 
     static String readFile(String filePath) throws IOException {

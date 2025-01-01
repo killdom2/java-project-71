@@ -7,12 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Formatter {
-    public static String choose(Map<String, Object> map1, Map<String, Object> map2,
-                                List<Map<String, Status>> list, String format) {
+    public static String choose(List<Map<Fields, Object>> differences, String format) {
 
         return switch (format) {
-            case "stylish" -> Stylish.format(map1, map2, list);
-            case "plain" -> Plain.format(map1, map2, list);
+            case "stylish" -> Stylish.format(differences);
+            case "plain" -> Plain.format(differences);
             default -> "Format not supported";
         };
     }

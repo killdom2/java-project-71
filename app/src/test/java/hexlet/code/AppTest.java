@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AppTest {
-    String filepath0;
     String filepath1;
     String filepath2;
     String filepath3;
@@ -22,11 +21,10 @@ public class AppTest {
 
     @BeforeEach
     void setUp() {
-        filepath0 = "src/main/resources/file1.json";
-        filepath1 = "src/main/resources/nestedFile1.json";
-        filepath2 = "src/main/resources/nestedFile2.json";
-        filepath3 = "src/main/resources/nestedFile1.yaml";
-        filepath4 = "src/main/resources/nestedFile2.yml";
+        filepath1 = "src/main/resources/jsonFile1.json";
+        filepath2 = "src/main/resources/jsonFile2.json";
+        filepath3 = "src/main/resources/yamlFile1.yaml";
+        filepath4 = "src/main/resources/yamlFile2.yml";
         format = "stylish";
     }
 
@@ -42,8 +40,8 @@ public class AppTest {
         String expected;
         String actual;
         try {
-            actual = Differ.generate(filepath1, filepath2, format);
-            expected = readString(Path.of("src/test/resources/nestedExpected.txt"));
+            actual = Differ.generate(format, filepath1, filepath2);
+            expected = readString(Path.of("src/test/resources/expectedStylish.txt"));
             assertEquals(expected, actual);
         } catch (Exception ignored) {
             System.out.println("File not found");
@@ -56,8 +54,8 @@ public class AppTest {
         String expected;
         String actual;
         try {
-            actual = Differ.generate(filepath3, filepath4, format);
-            expected = readString(Path.of("src/test/resources/nestedExpected.txt"));
+            actual = Differ.generate(format, filepath3, filepath4);
+            expected = readString(Path.of("src/test/resources/expectedStylish.txt"));
             assertEquals(expected, actual);
         } catch (Exception ignored) {
             System.out.println("File not found");
@@ -94,8 +92,8 @@ public class AppTest {
     void testJson() throws Exception {
         setUp();
         format = "json";
-        var expected = Files.readString(Path.of("src/test/resources/expected.json"));
-        var actual = Differ.generate(filepath1, filepath2, format);
+        var expected = Files.readString(Path.of("src/test/resources/expectedJson.json"));
+        var actual = Differ.generate(format, filepath1, filepath2);
         assertEquals(expected, actual);
     }
 }

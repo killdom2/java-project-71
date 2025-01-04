@@ -24,7 +24,6 @@ public class AppTest {
         expectedStylish = "expectedStylish.txt";
         expectedJson = "expectedJson.json";
         expectedPlain = "expectedPlain.txt";
-        format = "stylish";
     }
 
     @ParameterizedTest

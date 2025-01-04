@@ -4,3 +4,9 @@ build/
 gradle/
 gradlew
 gradlew.bat
+./.idea/
+**/logs/
+.settings
+bin
+.project*
+.classpath

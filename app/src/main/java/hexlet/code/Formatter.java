@@ -13,6 +13,7 @@ public class Formatter {
 
         return switch (format) {
             case "stylish" -> Stylish.format(differences);
+            case null -> Stylish.format(differences);
             case "plain" -> Plain.format(differences);
             case "json" -> Json.format(differences);
             default -> "Format not supported";

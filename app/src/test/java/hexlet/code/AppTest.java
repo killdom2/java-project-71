@@ -33,7 +33,7 @@ public class AppTest {
         var file1 = getAbsolutePath(filepath1 + fileFormat);
         var file2 = getAbsolutePath(filepath2 + fileFormat);
         var expected = Files.readString(Paths.get(getAbsolutePath(expectedStylish)));
-        String actual = Differ.generate(format, file1, file2);
+        String actual = Differ.generate(file1, file2);
         assertEquals(expected, actual);
     }
 

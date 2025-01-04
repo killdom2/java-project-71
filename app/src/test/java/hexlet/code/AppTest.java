@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static java.nio.file.Files.readString;
@@ -88,5 +89,13 @@ public class AppTest {
     void testApp() {
         App app = new App();
         assertThrows(NullPointerException.class, app::call);
+    }
+    @Test
+    void testJson() throws Exception {
+        setUp();
+        format = "json";
+        var expected = Files.readString(Path.of("src/test/resources/expected.json"));
+        var actual = Differ.generate(filepath1, filepath2, format);
+        assertEquals(expected, actual);
     }
 }

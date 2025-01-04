@@ -34,16 +34,16 @@ app:
 	./build/install/app/bin/app -h
 
 jsonJson:
-	./build/install/app/bin/app --format json src/main/resources/jsonFile1.json src/main/resources/jsonFile2.json
+	./build/install/app/bin/app --format json src/test/resources/fixtures/file1.json src/test/resources/fixtures/file2.json
 
 jsonPlain:
-		./build/install/app/bin/app --format plain src/main/resources/jsonFile1.json src/main/resources/jsonFile2.json
+		./build/install/app/bin/app --format plain src/test/resources/fixtures/file1.json src/test/resources/fixtures/file2.json
 
 jsonStylish:
-		./build/install/app/bin/app src/main/resources/jsonFile1.json src/main/resources/jsonFile2.json
+		./build/install/app/bin/app src/test/resources/fixtures/file1.json src/test/resources/fixtures/file2.json
 
 yaml:
-	./build/install/app/bin/app -f stylish src/main/resources/yamlFile1.yaml src/main/resources/yamlFile2.yml
+	./build/install/app/bin/app src/test/resources/fixtures/file1.yaml src/test/resources/fixtures/file2.yaml
 
 
 build-run: build run

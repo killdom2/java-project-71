@@ -74,7 +74,7 @@ public class AppTest {
     }
 
     private String getAbsolutePath(String fileName) {
-        return Paths.get("src", "test", "resources", fileName)
+        return Paths.get("src", "test", "resources", "fixtures", fileName)
                 .toAbsolutePath().normalize().toString();
     }
 }

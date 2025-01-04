@@ -35,7 +35,7 @@ public class Plain {
                 default -> throw new RuntimeException("Unhandled status " + status);
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     private static String instanceOf(Object value) {

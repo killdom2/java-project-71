@@ -23,6 +23,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.2")
     testImplementation(platform("org.junit:junit-bom:5.10.3"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.3")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

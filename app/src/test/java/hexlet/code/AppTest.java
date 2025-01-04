@@ -1,99 +1,81 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import static java.nio.file.Files.readString;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AppTest {
     String filepath1;
     String filepath2;
-    String filepath3;
-    String filepath4;
+    String expectedStylish;
+    String expectedJson;
+    String expectedPlain;
     String format;
 
     @BeforeEach
     void setUp() {
-        filepath1 = "src/main/resources/jsonFile1.json";
-        filepath2 = "src/main/resources/jsonFile2.json";
-        filepath3 = "src/main/resources/yamlFile1.yaml";
-        filepath4 = "src/main/resources/yamlFile2.yml";
+        filepath1 = "file1";
+        filepath2 = "file2";
+        expectedStylish = "expectedStylish.txt";
+        expectedJson = "expectedJson.json";
+        expectedPlain = "expectedPlain.txt";
         format = "stylish";
     }
 
-    @Test
-    void testDifferGenerate() {
-        assertThrows(IOException.class,
-                () -> Differ.generate("Path missing", "Path missing", format));
-    }
-
-    @Test
-    void testDifferGenerateJson() {
+    @ParameterizedTest
+    @ValueSource(strings = {".json", ".yaml"})
+    void testDefaultFormat(String fileFormat) throws Exception {
         setUp();
-        String expected;
-        String actual;
-        try {
-            actual = Differ.generate(format, filepath1, filepath2);
-            expected = readString(Path.of("src/test/resources/expectedStylish.txt"));
-            assertEquals(expected, actual);
-        } catch (Exception ignored) {
-            System.out.println("File not found");
-        }
+        var file1 = getAbsolutePath(filepath1 + fileFormat);
+        var file2 = getAbsolutePath(filepath2 + fileFormat);
+        var expected = Files.readString(Paths.get(getAbsolutePath(expectedStylish)));
+        String actual = Differ.generate(format, file1, file2);
+        assertEquals(expected, actual);
     }
 
-    @Test
-    void testDifferGenerateYaml() {
+    @ParameterizedTest
+    @ValueSource(strings = {".json", ".yaml"})
+    void testStylish(String fileFormat) throws Exception {
         setUp();
-        String expected;
-        String actual;
-        try {
-            actual = Differ.generate(format, filepath3, filepath4);
-            expected = readString(Path.of("src/test/resources/expectedStylish.txt"));
-            assertEquals(expected, actual);
-        } catch (Exception ignored) {
-            System.out.println("File not found");
-        }
+        format = "stylish";
+        var file1 = getAbsolutePath(filepath1 + fileFormat);
+        var file2 = getAbsolutePath(filepath2 + fileFormat);
+        var expected = Files.readString(Paths.get(getAbsolutePath(expectedStylish)));
+        String actual = Differ.generate(format, file1, file2);
+        assertEquals(expected, actual);
     }
 
-    @Test
-    void testDifferReadFile1() {
+    @ParameterizedTest
+    @ValueSource(strings = {".json", ".yaml"})
+    void testPlain(String fileFormat) throws Exception {
         setUp();
-        try {
-            String expected = readString(Path.of(filepath1));
-            String actual = Differ.readFile(filepath1);
-            assertEquals(expected, actual);
-        } catch (IOException e) {
-            System.out.println("File not found");
-        }
+        format = "plain";
+        var file1 = getAbsolutePath(filepath1 + fileFormat);
+        var file2 = getAbsolutePath(filepath2 + fileFormat);
+        var expected = Files.readString(Paths.get(getAbsolutePath(expectedPlain)));
+        String actual = Differ.generate(format, file1, file2);
+        assertEquals(expected, actual);
     }
 
-    @Test
-    void testDifferReadFile2() {
-        try {
-            String fileNotFound = Differ.readFile("File missing");
-            assertNull(fileNotFound);
-        } catch (IOException e) {
-            System.out.print("");
-        }
-    }
-    @Test
-    void testApp() {
-        App app = new App();
-        assertThrows(NullPointerException.class, app::call);
-    }
-    @Test
-    void testJson() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {".json", ".yaml"})
+    void testJson(String fileFormat) throws Exception {
         setUp();
         format = "json";
-        var expected = Files.readString(Path.of("src/test/resources/expectedJson.json"));
-        var actual = Differ.generate(format, filepath1, filepath2);
+        var file1 = getAbsolutePath(filepath1 + fileFormat);
+        var file2 = getAbsolutePath(filepath2 + fileFormat);
+        var expected = Files.readString(Paths.get(getAbsolutePath(expectedJson)));
+        String actual = Differ.generate(format, file1, file2);
         assertEquals(expected, actual);
+    }
+
+    private String getAbsolutePath(String fileName) {
+        return Paths.get("src", "test", "resources", fileName)
+                .toAbsolutePath().normalize().toString();
     }
 }

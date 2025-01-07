@@ -14,14 +14,14 @@ public class Differ {
 
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
 
-        String file1 = readFile(filepath1);
-        String file2 = readFile(filepath2);
+        String content1 = readFile(filepath1);
+        String content2 = readFile(filepath2);
 
         String[] arr = filepath1.split("\\.");
         String extension = arr[arr.length - 1];
 
-        Map<String, Object> map1 = Parser.parse(file1, extension);
-        Map<String, Object> map2 = Parser.parse(file2, extension);
+        Map<String, Object> map1 = Parser.parse(content1, extension);
+        Map<String, Object> map2 = Parser.parse(content2, extension);
 
         var differences = Comparator.compare(map1, map2);
 

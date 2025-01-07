@@ -1,79 +1,64 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
-    String filepath1;
-    String filepath2;
-    String expectedStylish;
-    String expectedJson;
-    String expectedPlain;
-    String format;
+    private static final String FILEPATH1 = getAbsolutePath("file1");
+    private static final String FILEPATH2 = getAbsolutePath("file2");
+    private static final String EXPECTED_STYLISH;
 
-    @BeforeEach
-    void setUp() {
-        filepath1 = "file1";
-        filepath2 = "file2";
-        expectedStylish = "expectedStylish.txt";
-        expectedJson = "expectedJson.json";
-        expectedPlain = "expectedPlain.txt";
+    static {
+        try {
+            EXPECTED_STYLISH = Files.readString(Paths
+                    .get(getAbsolutePath("expectedStylish.txt")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @ParameterizedTest
     @ValueSource(strings = {".json", ".yaml"})
     void testDefaultFormat(String fileFormat) throws Exception {
-        setUp();
-        var file1 = getAbsolutePath(filepath1 + fileFormat);
-        var file2 = getAbsolutePath(filepath2 + fileFormat);
-        var expected = Files.readString(Paths.get(getAbsolutePath(expectedStylish)));
-        String actual = Differ.generate(file1, file2);
-        assertEquals(expected, actual);
+        String actual = Differ.generate(FILEPATH1 + fileFormat, FILEPATH2 + fileFormat);
+        assertEquals(EXPECTED_STYLISH, actual);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {".json", ".yaml"})
     void testStylish(String fileFormat) throws Exception {
-        setUp();
-        format = "stylish";
-        var file1 = getAbsolutePath(filepath1 + fileFormat);
-        var file2 = getAbsolutePath(filepath2 + fileFormat);
-        var expected = Files.readString(Paths.get(getAbsolutePath(expectedStylish)));
-        String actual = Differ.generate(format, file1, file2);
-        assertEquals(expected, actual);
+        String actual = Differ
+                .generate(FILEPATH1 + fileFormat, FILEPATH2 + fileFormat, "stylish");
+        assertEquals(EXPECTED_STYLISH, actual);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {".json", ".yaml"})
     void testPlain(String fileFormat) throws Exception {
-        setUp();
-        format = "plain";
-        var file1 = getAbsolutePath(filepath1 + fileFormat);
-        var file2 = getAbsolutePath(filepath2 + fileFormat);
-        var expected = Files.readString(Paths.get(getAbsolutePath(expectedPlain)));
-        String actual = Differ.generate(format, file1, file2);
+        var expected = Files.readString(Paths
+                .get(getAbsolutePath("expectedPlain.txt")));
+        String actual = Differ
+                .generate(FILEPATH1 + fileFormat, FILEPATH2 + fileFormat, "plain");
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {".json", ".yaml"})
     void testJson(String fileFormat) throws Exception {
-        setUp();
-        format = "json";
-        var file1 = getAbsolutePath(filepath1 + fileFormat);
-        var file2 = getAbsolutePath(filepath2 + fileFormat);
-        var expected = Files.readString(Paths.get(getAbsolutePath(expectedJson)));
-        String actual = Differ.generate(format, file1, file2);
+        var expected = Files.readString(Paths
+                .get(getAbsolutePath("expectedJson.json")));
+        String actual = Differ
+                .generate(FILEPATH1 + fileFormat, FILEPATH2 + fileFormat, "json");
         assertEquals(expected, actual);
     }
 
-    private String getAbsolutePath(String fileName) {
+    private static String getAbsolutePath(String fileName) {
         return Paths.get("src", "test", "resources", "fixtures", fileName)
                 .toAbsolutePath().normalize().toString();
     }

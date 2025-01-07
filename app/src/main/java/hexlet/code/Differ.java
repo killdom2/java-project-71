@@ -9,33 +9,22 @@ import java.util.Map;
 public class Differ {
 
     public static String generate(String filepath1, String filepath2) throws Exception {
-        return generate("stylish", filepath1, filepath2);
+        return generate(filepath1, filepath2, "stylish");
     }
 
-    public static String generate(String format, String filepath1, String filepath2) throws Exception {
+    public static String generate(String filepath1, String filepath2, String format) throws Exception {
 
-        String file1 = "";
-        String file2 = "";
+        String file1 = readFile(filepath1);
+        String file2 = readFile(filepath2);
 
-        try {
-            file1 = readFile(filepath1);
-            file2 = readFile(filepath2);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Files not found");
-        }
+        String[] arr = filepath1.split("\\.");
+        String extension = arr[arr.length - 1];
 
-        Map<String, Object> map1 = Map.of();
-        Map<String, Object> map2 = Map.of();
+        Map<String, Object> map1 = Parser.parse(file1, extension);
+        Map<String, Object> map2 = Parser.parse(file2, extension);
 
-        if (filepath1.endsWith("json")) {
-            map1 = Parser.convertJson(file1);
-            map2 = Parser.convertJson(file2);
-        } else if (filepath1.endsWith("yaml") || filepath1.endsWith("yml")) {
-            map1 = Parser.convertYaml(file1);
-            map2 = Parser.convertYaml(file2);
-        }
+        var differences = Comparator.compare(map1, map2);
 
-        var differences = Differences.compare(map1, map2);
         return Formatter.choose(differences, format);
     }
 

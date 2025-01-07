@@ -9,6 +9,16 @@ import org.yaml.snakeyaml.Yaml;
 import java.util.Map;
 
 public class Parser {
+
+    static Map<String, Object> parse(String file, String extension) throws JsonProcessingException {
+
+        return switch (extension) {
+            case "json" -> convertJson(file);
+            case "yaml", "yml" -> convertYaml(file);
+            default -> throw new RuntimeException("Unsupported extension: " + extension);
+        };
+    }
+
     @SuppressWarnings({})
     static Map<String, Object> convertJson(String file) throws JsonProcessingException {
 

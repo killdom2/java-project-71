@@ -16,7 +16,7 @@ import static hexlet.code.Status.REMOVED;
 import static hexlet.code.Status.SAME;
 
 
-public class Differences {
+public class Comparator {
     public static List<Map<Fields, Object>> compare(Map<String, Object> map1, Map<String, Object> map2) {
         TreeSet<String> keys = new TreeSet<>();
         keys.addAll(map1.keySet());

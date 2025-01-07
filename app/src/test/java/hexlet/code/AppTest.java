@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AppTest {
+public final class AppTest {
     private static final String FILEPATH1 = getAbsolutePath("file1");
     private static final String FILEPATH2 = getAbsolutePath("file2");
     private static final String EXPECTED_STYLISH;

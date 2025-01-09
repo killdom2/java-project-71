@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Formatter {
-    public static String choose(List<Map<Field, Object>> differences, String format) throws JsonProcessingException {
+    public static String format(List<Map<Field, Object>> differences, String format) throws JsonProcessingException {
 
         return switch (format) {
             case "stylish" -> Stylish.format(differences);

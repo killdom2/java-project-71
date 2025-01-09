@@ -4,6 +4,7 @@ import hexlet.code.common.Field;
 
 import java.util.Map;
 import java.util.List;
+import java.util.Objects;
 import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,18 +37,7 @@ public class Comparator {
             } else if (!map2.containsKey(key)) {
                 differences.put(STATUS, REMOVED);
                 differences.put(OLD_VALUE, map1.get(key));
-            } else if ((map1.get(key) == null) && (map2.get(key) == null)) {
-                differences.put(STATUS, SAME);
-                differences.put(OLD_VALUE, null);
-            } else if ((map1.get(key) != null) && (map2.get(key) == null)) {
-                differences.put(STATUS, UPDATED);
-                differences.put(OLD_VALUE, map1.get(key));
-                differences.put(NEW_VALUE, null);
-            } else if ((map1.get(key) == null) && (map2.get(key) != null)) {
-                differences.put(STATUS, UPDATED);
-                differences.put(OLD_VALUE, null);
-                differences.put(NEW_VALUE, map2.get(key));
-            } else if (map1.get(key).equals(map2.get(key))) {
+            } else if (Objects.equals(map1.get(key), map2.get(key))) {
                 differences.put(STATUS, SAME);
                 differences.put(OLD_VALUE, map1.get(key));
             } else {

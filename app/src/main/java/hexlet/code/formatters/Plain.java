@@ -25,14 +25,17 @@ public class Plain {
 
             switch (status)  {
                 case SAME -> { }
-                case UPDATED -> sb.append("Property '").append(map.get(FIELD))
-                        .append("' was updated. From ").append(map.get(OLD_VALUE))
-                        .append(" to ").append(map.get(NEW_VALUE))
+                case UPDATED -> sb.append(String.format(
+                        "Property '%s' was updated. From %s to %s",
+                        map.get(FIELD), map.get(OLD_VALUE), map.get(NEW_VALUE)))
                         .append(System.lineSeparator());
-                case REMOVED -> sb.append("Property '").append(map.get(FIELD)).append("' was removed")
+                case REMOVED -> sb.append(String.format(
+                        "Property '%s' was removed",
+                                map.get(FIELD))).append(System.lineSeparator());
+                case ADDED -> sb.append(String.format(
+                        "Property '%s' was added with value: %s",
+                                map.get(FIELD), map.get(NEW_VALUE)))
                         .append(System.lineSeparator());
-                case ADDED -> sb.append("Property '").append(map.get(FIELD)).append("' was added with value: ")
-                        .append(map.get(NEW_VALUE)).append(System.lineSeparator());
                 default -> throw new RuntimeException("Unhandled status " + status);
             }
         }

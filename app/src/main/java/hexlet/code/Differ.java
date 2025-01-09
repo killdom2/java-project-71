@@ -17,20 +17,24 @@ public class Differ {
         String content1 = readFile(filepath1);
         String content2 = readFile(filepath2);
 
-        String[] arr = filepath1.split("\\.");
-        String extension = arr[arr.length - 1];
+        String extension1 = getExtension(filepath1);
+        String extension2 = getExtension(filepath2);
 
-        Map<String, Object> map1 = Parser.parse(content1, extension);
-        Map<String, Object> map2 = Parser.parse(content2, extension);
+        Map<String, Object> map1 = Parser.parse(content1, extension1);
+        Map<String, Object> map2 = Parser.parse(content2, extension2);
 
         var differences = Comparator.compare(map1, map2);
 
-        return Formatter.choose(differences, format);
+        return Formatter.format(differences, format);
     }
 
     static String readFile(String filePath) throws IOException {
-
         Path path = Paths.get(filePath).toAbsolutePath().normalize();
         return Files.readString(path);
+    }
+
+    static String getExtension(String filepath) {
+        String[] arr = filepath.split("\\.");
+        return arr[arr.length - 1];
     }
 }

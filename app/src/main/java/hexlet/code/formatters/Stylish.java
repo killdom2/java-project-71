@@ -24,20 +24,15 @@ public class Stylish {
             var status = map.get(STATUS);
             switch (status)  {
                 case SAME -> sb.append(String.format(
-                        "    %s: %s", map.get(FIELD), map.get(OLD_VALUE)))
-                        .append(System.lineSeparator());
+                        "    %s: %s%n", map.get(FIELD), map.get(OLD_VALUE)));
                 case UPDATED -> sb.append(String.format(
-                        "  - %s: %s", map.get(FIELD), map.get(OLD_VALUE)))
-                        .append(System.lineSeparator())
-                        .append(String.format(
-                        "  + %s: %s", map.get(FIELD), map.get(NEW_VALUE)))
-                        .append(System.lineSeparator());
+                        "  - %s: %s%n  + %s: %s%n",
+                                map.get(FIELD), map.get(OLD_VALUE),
+                                map.get(FIELD), map.get(NEW_VALUE)));
                 case REMOVED -> sb.append(String.format(
-                        "  - %s: %s", map.get(FIELD), map.get(OLD_VALUE)))
-                        .append(System.lineSeparator());
+                        "  - %s: %s%n", map.get(FIELD), map.get(OLD_VALUE)));
                 case ADDED -> sb.append(String.format(
-                        "  + %s: %s", map.get(FIELD), map.get(NEW_VALUE)))
-                        .append(System.lineSeparator());
+                        "  + %s: %s%n", map.get(FIELD), map.get(NEW_VALUE)));
                 default -> throw new RuntimeException("Unhandled status " + status);
             }
         }

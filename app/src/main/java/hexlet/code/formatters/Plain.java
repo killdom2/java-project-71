@@ -27,11 +27,12 @@ public class Plain {
                 case SAME -> { }
                 case UPDATED -> sb.append(String.format(
                         "Property '%s' was updated. From %s to %s",
-                        map.get(FIELD), map.get(OLD_VALUE), map.get(NEW_VALUE)))
+                                map.get(FIELD), map.get(OLD_VALUE), map.get(NEW_VALUE)))
                         .append(System.lineSeparator());
                 case REMOVED -> sb.append(String.format(
                         "Property '%s' was removed",
-                                map.get(FIELD))).append(System.lineSeparator());
+                                map.get(FIELD)))
+                        .append(System.lineSeparator());
                 case ADDED -> sb.append(String.format(
                         "Property '%s' was added with value: %s",
                                 map.get(FIELD), map.get(NEW_VALUE)))

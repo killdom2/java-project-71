@@ -24,15 +24,19 @@ public class Stylish {
             var status = map.get(STATUS);
             switch (status)  {
                 case SAME -> sb.append(String.format(
-                        "%s%s: %s", (" ").repeat(4), map.get(FIELD), map.get(OLD_VALUE)))
+                        "    %s: %s", map.get(FIELD), map.get(OLD_VALUE)))
                         .append(System.lineSeparator());
-                case UPDATED -> sb.append(String.format("  - %s: %s", map.get(FIELD), map.get(OLD_VALUE)))
+                case UPDATED -> sb.append(String.format(
+                        "  - %s: %s", map.get(FIELD), map.get(OLD_VALUE)))
                         .append(System.lineSeparator())
-                        .append(String.format("  + %s: %s", map.get(FIELD), map.get(NEW_VALUE)))
+                        .append(String.format(
+                        "  + %s: %s", map.get(FIELD), map.get(NEW_VALUE)))
                         .append(System.lineSeparator());
-                case REMOVED -> sb.append(String.format("  - %s: %s", map.get(FIELD), map.get(OLD_VALUE)))
+                case REMOVED -> sb.append(String.format(
+                        "  - %s: %s", map.get(FIELD), map.get(OLD_VALUE)))
                         .append(System.lineSeparator());
-                case ADDED -> sb.append(String.format("  + %s: %s", map.get(FIELD), map.get(NEW_VALUE)))
+                case ADDED -> sb.append(String.format(
+                        "  + %s: %s", map.get(FIELD), map.get(NEW_VALUE)))
                         .append(System.lineSeparator());
                 default -> throw new RuntimeException("Unhandled status " + status);
             }

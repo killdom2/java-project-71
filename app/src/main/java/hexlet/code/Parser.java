@@ -18,7 +18,6 @@ public class Parser {
         };
     }
 
-    @SuppressWarnings({})
     static Map<String, Object> convertJson(String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(json, new TypeReference<>() { });
